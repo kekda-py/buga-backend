@@ -6,11 +6,16 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"time"
 
 	"github.com/gofiber/websocket/v2"
 )
 
 func Delete(id string) error {
+
+	wait := time.Tick(time.Minute)
+
+	<-wait
 
 	var err error
 
