@@ -14,9 +14,9 @@ func WebsocketHub() {
 			log.Println("client registered")
 		case msg := <-broadcast:
 			for c := range connections {
-				if c == msg.by {
-					continue
-				}
+        if c == msg.by {
+          continue
+        }
 				if err := c.WriteMessage(websocket.TextMessage, []byte(msg.content)); err != nil {
 					log.Println("Error while sending message: ", err)
 
