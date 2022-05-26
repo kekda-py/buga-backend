@@ -9,6 +9,7 @@ import (
 	"github.com/gofiber/websocket/v2"
 	"github.com/joho/godotenv"
 	"github.com/uptrace/bun/driver/pgdriver"
+  "github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 var db *sql.DB
@@ -36,6 +37,8 @@ func main() {
 	db = sql.OpenDB(pgdriver.NewConnector(pgdriver.WithDSN(DB_URL)))
 
 	app := fiber.New()
+
+  app.Use(cors.New())
 
 	go WebsocketHub()
 

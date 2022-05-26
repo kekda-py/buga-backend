@@ -122,7 +122,7 @@ func GetMessages() ([]msg, error) {
 			return nil, err
 		}
 
-    result = append(result, msg{a, ii})
+    result = append(result, msg{ii, a})
 
 	}
 
