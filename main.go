@@ -19,6 +19,10 @@ type message struct {
 	by      *websocket.Conn
 }
 
+type msg struct {
+  content, id string
+}
+
 var connections = make(map[*websocket.Conn]client)
 var register = make(chan *websocket.Conn)
 var broadcast = make(chan message)
@@ -41,7 +45,7 @@ func main() {
 
 	app.Get("/message/get", func(c *fiber.Ctx) error {
 		var (
-			r   []string
+			r   []msg
 			err error
 		)
 

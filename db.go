@@ -102,26 +102,27 @@ func MakeMessage(content string, c *websocket.Conn) error {
 
 }
 
-func GetMessages() ([]string, error) {
+func GetMessages() ([]msg, error) {
 	var (
 		rows *sql.Rows
 		err  error
 	)
 
-	if rows, err = db.Query(`SELECT content FROM messages`); err != nil {
+	if rows, err = db.Query(`SELECT * FROM messages`); err != nil {
 		return nil, err
 	}
 
-	var result []string
+	var result []msg
 
 	for rows.Next() {
 		var a string
+    var ii string
 
-		if err = rows.Scan(&a); err != nil {
+		if err = rows.Scan(&a, &ii); err != nil {
 			return nil, err
 		}
 
-		result = append(result, a)
+    result = append(result, msg{content : a, id : ii})
 
 	}
 
