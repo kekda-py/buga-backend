@@ -67,5 +67,11 @@ func main() {
 
 	})
 
-  log.Fatal(app.Listen("0.0.0.0:3000"))
+	port := os.Getenv("PORT")
+
+  if os.Getenv("PORT") == "" {
+    port = "3000"
+  }
+
+  log.Fatal(app.Listen(":" + port))
 }
