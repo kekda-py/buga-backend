@@ -12,12 +12,14 @@ func WebsocketHub() {
 		case c := <-register:
 			connections[c] = client{}
 			log.Println("client registered")
-		case msg := <-broadcast:
+		case m := <-broadcast:
 			for c := range connections {
-        if c == msg.by {
+        log.Println("checking: ", m)
+        if c == m.by {
           continue
         }
-				if err := c.WriteMessage(websocket.TextMessage, []byte(msg.content)); err != nil {
+        log.Println("Sending: ", m.content)
+				if err := c.WriteMessage(websocket.TextMessage, []byte(m.content)); err != nil {
 					log.Println("Error while sending message: ", err)
 
 					c.WriteMessage(websocket.CloseMessage, []byte{})
@@ -52,7 +54,11 @@ func WebSocket(c *websocket.Conn) {
 		}
 
 		if mt == websocket.TextMessage {
-			MakeMessage(string(m), c)
+			// MakeMessage(string(m), c)
+      broadcast <- message{
+        content : string(m),
+        by : c,
+      }
 		} else {
 			log.Println("websocket message received of type", mt)
 		}
