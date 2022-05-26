@@ -20,7 +20,7 @@ type message struct {
 }
 
 type msg struct {
-  content, id string
+   Content, Id string
 }
 
 var connections = make(map[*websocket.Conn]client)
@@ -53,8 +53,8 @@ func main() {
 			log.Println("Error while getting messages: ", err)
 			return err
 		}
-
-		return c.JSON(fiber.Map{
+		
+    return c.JSON(fiber.Map{
 			"messages": r,
 		})
 
