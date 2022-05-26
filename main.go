@@ -46,6 +46,10 @@ func main() {
 		WebSocket(c)
 	}))
 
+  app.Get("/", func(c *fiber.Ctx) error {
+    return c.SendString("hi")
+  })
+
 	app.Get("/message/get", func(c *fiber.Ctx) error {
 		var (
 			r   []msg
