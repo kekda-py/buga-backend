@@ -1,3 +1,16 @@
 # buga-backend
 
-A backend for a chat app i am working on - `buga-chat` written in `go` using `fiber`
+backend for https://github.com/kekda-py/buga-backend
+
+## Installation
+```
+git clone https://github.com/kekda-py/buga-backend
+cd buga-backend
+go install
+```
+
+## Usage
+```
+go build
+./buga-backend
+```
